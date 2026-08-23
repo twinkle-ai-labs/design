@@ -7,6 +7,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import Providers from "@/components/Providers";
 import BackToTop from "@/components/BackToTop";
 import HeaderBar from "@/components/HeaderBar";
+import Starfield from "@/components/Starfield";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -14,6 +15,7 @@ const HOME_URL = "https://twinklelabs.kr";
 const DESIGN_URL = "https://design.twinklelabs.kr";
 const BLOG_URL = "https://blog.twinklelabs.kr";
 const POLARIS_URL = "https://polaris.twinklelabs.kr";
+const CONTACT_EMAIL = "twinkle.ai.labs@gmail.com";
 
 const NAME = "Twinkle AI Labs";
 
@@ -75,16 +77,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className={styles.main}>{children}</main>
         <BackToTop />
         <footer className={styles.footer}>
+          <Starfield seed={19910104} height="100%" dots={26} sparkles={3} className={styles.footerSky} />
           <div className={styles.footerInner}>
-            <p className={styles.footerLine}>
-              <StarMark className={styles.footerStar} />
-              {NAME}
-            </p>
-            <nav className={styles.footerLinks}>
-              <a href={HOME_URL} className={styles.footerLink}>홈</a>
-              <a href={BLOG_URL} className={styles.footerLink}>블로그</a>
-              <a href={POLARIS_URL} className={styles.footerLink}>약관 보관소</a>
-            </nav>
+            <div className={styles.footerTop}>
+              <div className={styles.footerBrand}>
+                <p className={styles.footerName}><StarMark className={styles.footerStar} />{NAME}</p>
+                <p className={styles.footerLine}>모든 제품이 같은 목소리로 말하고 움직이게 하는 디자인 시스템입니다.</p>
+              </div>
+              <nav className={styles.footerColumn} aria-label="바닥글 메뉴">
+                <p className={styles.footerHeading}>바로가기</p>
+                <div className={styles.footerLinks}>
+                  <a href={HOME_URL} className={styles.footerLink}>홈</a>
+                  <a href={DESIGN_URL} className={styles.footerLink}>디자인 시스템</a>
+                  <a href={BLOG_URL} className={styles.footerLink}>블로그</a>
+                  <a href={POLARIS_URL} className={styles.footerLink}>약관</a>
+                </div>
+              </nav>
+              <div className={styles.footerColumn}>
+                <p className={styles.footerHeading}>연락</p>
+                <a className={styles.footerMail} href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              </div>
+            </div>
+            <div className={styles.footerBottom}>
+              <p className={styles.footerCopyright}>© 2026 {NAME}</p>
+              <p className={styles.footerMotto}>Aurora Ledger</p>
+            </div>
           </div>
         </footer>
         </Providers>
