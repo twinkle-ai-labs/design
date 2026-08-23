@@ -1,0 +1,201 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* 머리띠의 바탕과 밑줄은 이 겹이 든다 — 맨 위에서는 없고, 스크롤하면 켜진다.
+   맨 위에서 판이 그어져 있으면 첫 화면이 «머리띠 + 하늘» 둘로 잘려 보인다.
+   글이 머리띠 밑으로 들어가기 시작할 때에야 그 판이 필요해진다.
+
+   글자가 아니라 이 겹만 켜고 끄는 이유: 바탕을 직접 여닫으면 backdrop-filter 가
+   투명할 때에도 뒤를 흐려서, 아직 덮을 것이 없는데 하늘이 뭉개진다. */
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--bg) var(--alpha-strong), transparent);
+  backdrop-filter: blur(0.75rem);
+  /* px — 헤어라인. 글자를 따라 굵어질 것이 아니다. */
+  border-bottom: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+  /* 기본값은 «늘 서 있다» — 스크롤에 물린 시계를 모르는 브라우저와
+     움직임을 줄여 달라고 한 사람에게는 판이 처음부터 있는 편이 안전하다.
+     못 읽는 머리띠보다 늘 있는 머리띠가 낫다. */
+  opacity: 1;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .header::after {
+      /* 시계를 아는 브라우저에서는 기본이 «없음»이다.
+         위의 opacity:1 은 시계를 **모르는** 쪽을 위한 대비책인데, 그대로 두면
+         구를 것이 없는 짧은 화면에서도 판이 서 버린다 — 스크롤 통에 굴릴 것이
+         없으면 시계가 멈추고(진행도 null) 애니메이션이 «효력 없음»이 되어
+         밑의 기본값이 그대로 드러나기 때문이다.
+         한 번도 구르지 않았는데 구른 척하는 판은 거짓말이다. */
+      opacity: 0;
+      animation: headerSettle var(--motion-base) linear both;
+      /* scroll() 만 쓰면 «가장 가까운 스크롤 통»을 찾는데, 머리띠 위로는 그런 통이
+         없어서 시계가 멈춘 채로 있는다(진행도가 null 이다). 문서를 콕 집어 준다. */
+      animation-timeline: scroll(root block);
+      /* 첫 한 뼘을 내리는 동안 켜진다 — 머리띠 키만큼이면 충분하다. */
+      animation-range: 0 4rem;
+    }
+  }
+}
+
+@keyframes headerSettle {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.headerInner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: var(--s1h) var(--s2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  color: var(--text);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-snug);
+}
+.brand:hover { text-decoration: none; }
+
+.star {
+  width: 1.125rem;
+  height: 1.125rem;
+  /* px — 장식의 번짐이라 글자와 함께 커지지 않는다. */
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) var(--alpha-half), transparent));
+  transition: transform var(--motion-base) var(--ease);
+}
+.brand:hover .star { transform: rotate(90deg) scale(1.08); }
+
+.brandName { font-size: var(--fs-16); }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.navLink {
+  color: var(--text-sub);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  transition: color var(--motion-fast) var(--ease);
+}
+.navLink:hover { color: var(--text); text-decoration: none; }
+
+/* 구획이 제 여백을 갖는다 — 띠가 화면 전폭을 가로지르려면 통이 여기서 좁아지면 안 된다. */
+.main { flex: 1; }
+
+.footer {
+  position: relative;
+  /* 하늘이 이 판 안에 갇히도록 */
+  isolation: isolate;
+  overflow: hidden;
+  /* px — 헤어라인. */
+  border-top: var(--stroke-hair) solid color-mix(in srgb, var(--divider) var(--alpha-soft), transparent);
+  background: var(--band);
+}
+
+/* 바닥의 하늘은 위에서 스며 나온다 — 마스크 방향이 첫 화면과 반대다. */
+.footerSky {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 65%);
+  mask-image: linear-gradient(to bottom, transparent, #000 65%);
+}
+
+.footerInner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: var(--s5) var(--s2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  justify-content: space-between;
+}
+
+.footerBrand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--s0) var(--s1);
+  max-width: 30rem;
+}
+
+.footerStar {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--accent);
+}
+
+.footerName {
+  font-size: var(--fs-14);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-slight);
+  color: var(--text);
+}
+
+/* 별과 이름이 첫 줄을 나눠 쓰고, 문장은 그 아래 두 칸을 통째로 쓴다. */
+.footerLine {
+  grid-column: 1 / -1;
+  color: var(--text-faint);
+  font-size: var(--fs-12);
+  line-height: var(--lh-body);
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--s1) var(--s3);
+  font-size: var(--fs-12);
+}
+
+.footerLink {
+  color: var(--text-sub);
+  font-weight: var(--fw-medium);
+}
+
+@media (max-width: 29.99em) {
+  /* 좁은 화면에서는 머리띠가 이름과 테마만 갖는다 — 나머지는 바닥에도 있다. */
+  .nav .navLink:not(:last-of-type) { display: none; }
+}
+
+@media (min-width: 48em) {
+  .headerInner, .footerInner { padding-left: var(--s3); padding-right: var(--s3); }
+  .footerInner { padding-block: var(--s6); }
+}
+
+/* 현재 사이트의 navLink — 디자인 사이트이므로 디자인 링크가 강조된다 */
+.navLinkActive {
+  color: var(--accent);
+  font-weight: var(--fw-bold);
+}
+
+/* 디자인 사이트의 footer는 단순하게 */
+.footerLine {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-bold);
+  color: var(--text-sub);
+  margin: 0;
+}
+
+.footerStar {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--accent);
+  flex: none;
+}
