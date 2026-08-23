@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     "Twinkle AI Labs 의 디자인 시스템. 이름의 뜻, 색·불투명도·간격·크기·모양·움직임·글자의 사다리, 그리고 지나온 길.",
 };
 
-// 화면이 그려지기 전에 테마를 정한다 — 늦으면 흰 화면이 한 번 번쩍인다.
-const themeBoot = `(function(){try{var t=localStorage.getItem("twinkle-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
+// 화면이 그려지기 전에 테마를 정한다 — 쿠키를 먼저 읽어 서브도메인 간 동기화하고, 없으면 localStorage를 본다.
+const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):localStorage.getItem("twinkle-theme")||localStorage.getItem("polaris-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
