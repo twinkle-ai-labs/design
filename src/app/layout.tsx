@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Analytics from "@/components/Analytics";
 import Aurora from "@/components/Aurora";
 import RouteViews from "@/components/RouteViews";
 import StarMark from "@/components/StarMark";
 import ThemeToggle from "@/components/ThemeToggle";
+import Providers from "@/components/Providers";
+import BackToTop from "@/components/BackToTop";
+import HeaderBar from "@/components/HeaderBar";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -18,11 +21,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(DESIGN_URL),
   title: { default: "Aurora Ledger — 디자인 시스템", template: `%s · ${NAME}` },
   description:
-    "Twinkle AI Labs 의 디자인 시스템. 이름의 뜻, 색·불투명도·간격·크기·모양·움직임·글자의 사다리, 그리고 지나온 길.",
+    "Twinkle AI Labs의 제품을 하나의 언어로 연결하는 디자인 시스템, Aurora Ledger를 소개합니다.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 // 화면이 그려지기 전에 테마를 정한다 — 쿠키를 먼저 읽어 서브도메인 간 동기화하고, 없으면 localStorage를 본다.
-const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):localStorage.getItem("twinkle-theme")||localStorage.getItem("polaris-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
+const themeBoot = `(function(){try{var m=document.cookie.match(/(?:^|; )twinkle-theme=([^;]*)/);var t=m?decodeURIComponent(m[1]):null;if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -36,10 +45,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
       </head>
       <body>
+        <Providers>
         <RouteViews />
         {/* 하늘은 어느 화면에나 걸린다 */}
         <Aurora />
-        <header className={styles.header}>
+        <HeaderBar>
           <div className={styles.headerInner}>
             <a href={HOME_URL} className={styles.brand}>
               <StarMark gradientId="twinkle-brand" className={styles.star} />
@@ -49,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href={HOME_URL} className={styles.navLink}>
                 홈
               </a>
-              <a href={DESIGN_URL} className={`${styles.navLink} \${styles.navLinkActive}`}>
+              <a href={DESIGN_URL} className={styles.navLink}>
                 디자인
               </a>
               <a href={BLOG_URL} className={styles.navLink}>
@@ -61,8 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <ThemeToggle toLight="밝은 화면으로" toDark="어두운 화면으로" />
             </nav>
           </div>
-        </header>
+        </HeaderBar>
         <main className={styles.main}>{children}</main>
+        <BackToTop />
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
             <p className={styles.footerLine}>
@@ -76,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
         </footer>
+        </Providers>
       </body>
     </html>
   );

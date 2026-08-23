@@ -1,5 +1,6 @@
-import Link from "next/link";
+import DocsNav from "@/components/DocsNav";
 import StarMark from "@/components/StarMark";
+import Starfield from "@/components/Starfield";
 import {
   ALPHA,
   CONTROLS,
@@ -19,7 +20,7 @@ import styles from "./design.module.css";
 export const metadata = {
   title: "Aurora Ledger",
   description:
-    "Twinkle AI Labs 의 디자인 시스템. 이름의 뜻, 색·불투명도·간격·크기·모양·움직임·글자의 사다리, 그리고 지나온 길.",
+    "Twinkle AI Labs의 모든 제품이 공유하는 디자인 시스템, Aurora Ledger의 토큰과 원칙을 소개합니다.",
 };
 
 /** 구획의 머리 — 소개 화면과 같은 꼴. 오른쪽에 토큰의 자리를 단다. */
@@ -120,31 +121,56 @@ export default function DesignPage() {
     <>
       {/* ── 머리 ───────────────────────────────────────────── */}
       <section className={styles.hero}>
+        <Starfield
+          className={styles.heroStars}
+          seed={20260824}
+          height="58rem"
+          dots={92}
+          sparkles={12}
+          shooting={3}
+          keepout={{ x: [15, 82], y: [18, 62] }}
+        />
         <div className={styles.shell}>
-          <p className={styles.kicker}>{DESIGN.eyebrow}</p>
-          <h1 className={styles.title}>{DESIGN.title}</h1>
-          <p className={styles.reading}>{DESIGN.reading}</p>
-          <p className={styles.lead}>{DESIGN.lead}</p>
-          <div className={styles.rule} aria-hidden="true" />
-          <p className={styles.canon}>
-            값의 정본은 저장소의 <code>CLAUDE.md</code> 다. 이 장은 그 값이 무슨 뜻인지와 무슨
-            이름으로 불리는지를 따라간다 — 앱은 <code>TwinkleTheme.&lt;사다리&gt;.&lt;칸&gt;</code>,
-            웹은 <code>var(--…)</code>.
-          </p>
+          <div className={styles.heroGrid}>
+            <div>
+              <p className={styles.kicker}>{DESIGN.eyebrow}</p>
+              <h1 className={styles.title}>{DESIGN.title}</h1>
+              <p className={styles.reading}>{DESIGN.reading}</p>
+              <p className={styles.lead}>{DESIGN.lead}</p>
+              <div className={styles.rule} aria-hidden="true" />
+              <p className={styles.canon}>
+                색과 글자, 간격과 움직임까지 하나의 기준으로 연결합니다. 어떤 제품을 만나더라도
+                익숙하고 분명한 경험을 제공하는 것이 Aurora Ledger의 역할입니다.
+              </p>
+            </div>
+            <aside className={styles.heroPanel} aria-label="디자인 시스템 요약">
+              <p className={styles.panelEyebrow}>System overview</p>
+              <strong className={styles.panelTitle}>하나의 언어로<br />모든 제품을 잇습니다.</strong>
+              <dl className={styles.stats}>
+                <div><dd>2</dd><dt>Color modes</dt></div>
+                <div><dd>7</dd><dt>Token groups</dt></div>
+                <div><dd>8<span>pt</span></dd><dt>Base grid</dt></div>
+                <div><dd>6</dd><dt>Principles</dt></div>
+              </dl>
+              <span className={styles.panelNote}>Mist / Dusk · v2026.08</span>
+            </aside>
+          </div>
         </div>
       </section>
 
+      <DocsNav />
+
       {/* ── 이름의 뜻 ──────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section id="meaning" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="이름" title="이름의 뜻" />
+          <Head kicker="Identity" title="빛과 숫자를 위한 디자인" />
           <p className={styles.body}>
-            유래는 적힌 적이 없다. 2026년 8월 9일, 목업을 다시 짜며 여러 스킨 중 보라 한 벌에 붙은 CSS
-            주석 한 줄이 시작이었다. 아래는 뒤에 이름을 뜯어 읽은 <strong>해석</strong>이다.
+            Aurora Ledger는 2026년 8월, 첫 제품의 화면을 다듬는 과정에서 시작했습니다.
+            이름에는 Twinkle AI Labs가 만들고 싶은 화면의 두 가지 성격이 담겨 있습니다.
           </p>
           <ul className={styles.words}>
             {DESIGN.words.map((w) => (
-              <li key={w.word} className={styles.card}>
+              <li key={w.word} className={styles.wordPanel}>
                 <h3 className={styles.word}>
                   <StarMark className={styles.wordStar} />
                   {w.word}
@@ -155,19 +181,20 @@ export default function DesignPage() {
             ))}
           </ul>
           <p className={styles.aside}>
-            줄여 부르지 않는다 — 같은 이름 <code>Aurora</code> 가 다른 제품에도 있다. 디자인 시스템은
-            «Aurora Ledger» 한 벌로 부르고, 앱의 코드 식별자는 <code>Twinkle*</code> 다.
+            공식 명칭은 <code>Aurora Ledger</code>입니다. 제품 코드에서는 <code>Twinkle*</code> 접두사를
+            사용해 브랜드와 구현의 이름을 일관되게 연결합니다.
           </p>
         </div>
       </section>
 
       {/* ── 색 ─────────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
+      <section id="colors" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="색" code="colors" />
+          <Head kicker="Foundation" title="색은 역할로 선택합니다" code="colors" />
           <p className={styles.body}>
-            원색과 의미의 두 층이다. 화면은 의미만 본다 — 원색을 직접 부르면 다크가 한 자리씩 죽는다.
-            중성색은 남보라를 한 방울 머금고, 채도 있는 보라는 «지금 누를 것»에만 선다.
+            화면에서는 색상값 대신 역할을 지정합니다. 같은 역할이 라이트와 다크 모드에서 알맞은 색으로
+            바뀌기 때문에 대비와 브랜드 인상이 함께 유지됩니다. 선명한 보라는 사용자의 다음 행동을
+            안내할 때 가장 먼저 사용합니다.
           </p>
           <div className={styles.panes}>
             <Pane theme="light" />
@@ -187,13 +214,12 @@ export default function DesignPage() {
       </section>
 
       {/* ── 불투명도 ───────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section id="alpha" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="불투명도" code="alpha" />
+          <Head kicker="Foundation" title="강약을 만드는 여섯 단계" code="alpha" />
           <p className={styles.body}>
-            «그 색을 얼마나 옅게 쓰는가»의 사다리. 화면이 열세 가지 리터럴을 쓰던 것을 여섯 칸으로
-            눌렀다. 색 자체가 반투명인 토큰은 이 사다리를 거치지 않는다 — 그것은 옅게 쓴 색이 아니라
-            그냥 그 색이다.
+            불투명도는 정보의 우선순위와 표면의 깊이를 조절합니다. 임의의 값을 추가하지 않고 여섯 단계
+            안에서 선택해, 서로 다른 제품에서도 같은 수준의 강조가 같은 인상으로 보이게 합니다.
           </p>
           <ul className={styles.alpha}>
             {ALPHA.map((a) => (
@@ -209,10 +235,10 @@ export default function DesignPage() {
       </section>
 
       {/* ── 간격 ───────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
+      <section id="spacing" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="간격" code="spacing" />
-          <p className={styles.body}>8pt 격자. 반 칸은 8의 배수 사이가 실제로 필요해진 자리에만 있다.</p>
+          <Head kicker="Foundation" title="리듬을 만드는 8pt 격자" code="spacing" />
+          <p className={styles.body}>기본 간격은 8의 배수를 따릅니다. 2·4·6px은 정렬과 미세 조정처럼 꼭 필요한 경우에만 사용합니다.</p>
           <ol className={styles.spacing}>
             {SPACING.map((s) => (
               <li key={s.token} className={styles.spaceRow}>
@@ -226,9 +252,9 @@ export default function DesignPage() {
       </section>
 
       {/* ── 크기 ───────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section id="sizes" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="크기" code="iconSize · elevation · shapes · controlSize · stroke" />
+          <Head kicker="Foundation" title="크기와 형태의 기준" code="iconSize · elevation · shapes · controlSize · stroke" />
           <div className={styles.sizeGrid}>
             <div className={styles.card}>
               <h3 className={styles.cardTitle}>아이콘</h3>
@@ -303,9 +329,9 @@ export default function DesignPage() {
       </section>
 
       {/* ── 움직임 ─────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
+      <section id="motion" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="움직임" code="motion" />
+          <Head kicker="Interaction" title="빠르고 자연스러운 움직임" code="motion" />
           <p className={styles.body}>{MOTION.note}</p>
           <div className={styles.motionGrid}>
             <ul className={styles.durations}>
@@ -317,7 +343,7 @@ export default function DesignPage() {
               ))}
             </ul>
             <div className={`${styles.card} ${styles.motionCard}`} tabIndex={0}>
-              <p className={styles.use}>상자에 손을 올리면 두 곡선이 달린다.</p>
+              <p className={styles.use}>카드에 포인터를 올려 진입과 퇴장 곡선의 차이를 확인해 보세요.</p>
               {MOTION.curves.map((c) => (
                 <div key={c.token} className={styles.curve}>
                   <span className={`${styles.track} ${c.token === "exit" ? styles.trackExit : styles.trackEase}`}>
@@ -335,12 +361,13 @@ export default function DesignPage() {
       </section>
 
       {/* ── 글자 ───────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section id="type" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="토큰" title="글자" code="typography · Pretendard" />
+          <Head kicker="Foundation" title="숫자와 문장을 또렷하게" code="typography · Pretendard" />
           <p className={styles.body}>
-            크기 열 칸(11 → 40)에 열다섯 자리, 굵기는 가진 넷(400·500·600·700). 행간 세 칸 — 제목 1.25 ·
-            촘촘 1.35 · 본문 1.65. 자간 세 칸 — 큰 글자일수록 조인다(-.03 · -.02 · -.01em). 표에 없는 값은 «세게»가 아니라 우연이다. 한글은 낱말 안에서 끊지 않는다.
+            Pretendard를 기준으로 숫자, 제목, 본문, 레이블에 필요한 15가지 역할을 정의합니다.
+            큰 글자는 핵심 결과와 메시지에, 작은 글자는 맥락과 상태를 설명하는 데 사용합니다.
+            정의되지 않은 크기와 굵기는 사용하지 않으며, 한글 낱말은 줄 중간에서 나누지 않습니다.
           </p>
           <ul className={styles.type}>
             {TYPE.map((t, i) => (
@@ -366,9 +393,9 @@ export default function DesignPage() {
       </section>
 
       {/* ── 법 ─────────────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.band} ${styles.reveal}`}>
+      <section id="rules" className={`${styles.section} ${styles.band} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="판단" title="값이 아니라 법" />
+          <Head kicker="Principles" title="좋은 화면을 고르는 여섯 원칙" />
           <ul className={styles.notes}>
             {DESIGN.rules.map((r) => (
               <li key={r} className={styles.note}>
@@ -381,9 +408,9 @@ export default function DesignPage() {
       </section>
 
       {/* ── 히스토리 ───────────────────────────────────────── */}
-      <section className={`${styles.section} ${styles.reveal}`}>
+      <section id="history" className={`${styles.section} ${styles.reveal}`}>
         <div className={styles.shell}>
-          <Head kicker="지나온 길" title="되돌린 결정은 지우지 않는다" />
+          <Head kicker="History" title="결정과 배움을 함께 기록합니다" />
           <ol className={styles.history}>
             {HISTORY.map((h, i) => (
               <li key={i} className={styles.event}>
@@ -393,11 +420,6 @@ export default function DesignPage() {
               </li>
             ))}
           </ol>
-          <p className={styles.back}>
-            <Link href="https://twinklelabs.kr" className={styles.inlineLink}>
-              ← 처음으로
-            </Link>
-          </p>
         </div>
       </section>
     </>

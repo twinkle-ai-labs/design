@@ -11,15 +11,88 @@
 }
 
 .section {
+  width: 100%;
+  min-width: 0;
+  max-width: 100vw;
+  box-sizing: border-box;
   padding-block: var(--s7);
   scroll-margin-top: 4.5rem;
 }
 
-.band { background: var(--band); }
+.band {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--band) 84%, transparent), color-mix(in srgb, var(--surface) 46%, transparent));
+  border-block: var(--stroke-hair) solid var(--card-border);
+}
 
 .hero {
-  padding-block: var(--s7) var(--s5);
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100vw;
+  box-sizing: border-box;
+  isolation: isolate;
+  padding-block: var(--s7) var(--s6);
 }
+
+.heroStars {
+  z-index: 0;
+  opacity: .82;
+  -webkit-mask-image: linear-gradient(to bottom, #000 42%, rgba(0, 0, 0, .72) 68%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 42%, rgba(0, 0, 0, .72) 68%, transparent 96%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  right: max(-10rem, calc((100vw - var(--shell)) / 2 - 8rem));
+  top: -12rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary-lit) 18%, transparent), transparent 68%);
+  pointer-events: none;
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--s5);
+  align-items: end;
+}
+
+.heroPanel {
+  position: relative;
+  overflow: hidden;
+  padding: var(--s4);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--primary-soft) 42%, var(--surface)));
+  backdrop-filter: blur(1.5rem) saturate(140%);
+  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--primary) 13%, transparent), inset 0 1px rgba(255,255,255,.72);
+}
+.heroPanel::before {
+  content: "";
+  position: absolute;
+  width: 11rem;
+  height: 11rem;
+  right: -4rem;
+  top: -5rem;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  opacity: .16;
+}
+.panelEyebrow { color: var(--accent); font-size: var(--fs-11); font-weight: var(--fw-bold); letter-spacing: var(--tr-wide); text-transform: uppercase; }
+.panelTitle { display: block; margin-top: var(--s2); font-size: var(--fs-28); line-height: var(--lh-title); letter-spacing: var(--tr-tight); }
+.stats { display: grid; grid-template-columns: 1fr 1fr; margin-top: var(--s4); border-block: var(--stroke-hair) solid var(--glass-border); }
+.stats div { padding: var(--s2) 0; text-align: center; }
+.stats div:nth-child(odd) { border-right: var(--stroke-hair) solid var(--glass-border); }
+.stats div:nth-child(even) { padding-left: 0; }
+.stats div:nth-child(-n+2) { border-bottom: var(--stroke-hair) solid var(--glass-border); }
+.stats dt { margin-top: .15rem; color: var(--text-faint); font-size: var(--fs-11); font-weight: var(--fw-semibold); }
+.stats dd { margin: 0; color: var(--text); font-size: var(--fs-28); font-weight: var(--fw-bold); letter-spacing: var(--tr-tight); }
+.stats dd span { margin-left: .1em; color: var(--text-sub); font-size: var(--fs-12); }
+.panelNote { display: block; margin-top: var(--s2); color: var(--text-faint); font-family: ui-monospace, "SF Mono", monospace; font-size: var(--fs-11); }
 
 .kicker {
   display: inline-flex;
@@ -106,7 +179,8 @@
 }
 
 .body {
-  max-width: 40rem;
+  max-width: none;
+  width: 100%;
   color: var(--text-sub);
   font-size: var(--fs-16);
   line-height: var(--lh-body);
@@ -165,10 +239,13 @@
   flex-direction: column;
   gap: var(--s1h);
   padding: var(--s3);
-  background: var(--surface);
+  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--primary-soft) 20%, var(--surface)));
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-raised);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.65);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
+  transition: transform var(--motion-base) var(--ease), box-shadow var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease);
 }
+.card:hover { transform: translateY(-0.18rem); box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--primary) 14%, transparent), inset 0 1px rgba(255,255,255,.7); border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
 
 .cardTitle {
   font-size: var(--fs-16);
@@ -185,6 +262,27 @@
   gap: var(--s2h);
   grid-template-columns: 1fr;
 }
+
+.wordPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1h);
+  padding: var(--s4) var(--s1) var(--s3);
+  border-top: var(--stroke-ring) solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.wordPanel::before {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  left: 0;
+  width: 3rem;
+  height: .3rem;
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+}
+.wordPanel .wordReading { margin-top: calc(var(--s0) * -1); }
+.wordPanel .body { max-width: none; }
 
 .word {
   display: flex;
@@ -417,10 +515,23 @@
 .sizeGrid {
   display: grid;
   gap: var(--s2h);
+  padding: var(--s2);
+  border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--primary-soft) 16%, var(--surface)));
+  box-shadow: 0 1rem 3rem color-mix(in srgb, var(--primary) 8%, transparent), inset 0 1px rgba(255,255,255,.65);
   /* minmax(0, …) — 1fr 은 minmax(auto, 1fr) 이라 keep-all 이 걸린 긴 토큰 이름이
      칸의 최소 너비가 되어 375px 에서 판을 밀어냈다. 0 으로 내려야 낱말이 칸에서 꺾인다. */
   grid-template-columns: minmax(0, 1fr);
 }
+
+.sizeGrid > .card {
+  border: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--sunken) 48%, transparent);
+  box-shadow: none;
+}
+.sizeGrid > .card:hover { transform: none; box-shadow: none; border-color: transparent; }
 
 .icons, .elev, .shapes {
   list-style: none;
@@ -524,18 +635,15 @@
 .type {
   list-style: none;
   margin: var(--s4) 0 0;
-  padding: 0 var(--s3);
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-raised);
+  padding: 0;
+  border-block: var(--stroke-hair) solid var(--divider);
 }
 
 .typeRow {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s0) var(--s3);
-  align-items: baseline;
-  padding: var(--s2) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1h);
+  padding: var(--s3) 0;
   /* px — 헤어라인 */
   border-top: var(--stroke-hair) solid var(--divider);
 }
@@ -549,7 +657,13 @@
   text-overflow: ellipsis;
 }
 
-.typeMeta { display: flex; gap: var(--s1h); align-items: baseline; }
+.typeMeta {
+  order: -1;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s2);
+  align-items: baseline;
+}
 
 /* ── 히스토리 ────────────────────────────────────────────────── */
 
@@ -589,17 +703,6 @@
 
 .what { font-size: var(--fs-16); font-weight: var(--fw-semibold); }
 
-.back { margin-top: var(--s6); }
-
-.inlineLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s0);
-  color: var(--accent);
-  font-size: var(--fs-14);
-  font-weight: var(--fw-bold);
-}
-
 /* ── 스크롤을 따라 떠오르기 — 소개 화면과 같은 시계 ──────────── */
 
 @supports (animation-timeline: view()) {
@@ -618,6 +721,61 @@
 
 /* ── 넓어지면 ────────────────────────────────────────────────── */
 
+@media (max-width: 39.99em) {
+  .shell { width: 100%; max-width: none; box-sizing: border-box; padding-inline: 5%; margin-inline: auto; }
+  .hero { padding-block: var(--s4) var(--s3); }
+  .heroGrid { gap: var(--s3); }
+  .title { font-size: var(--fs-36); }
+  .lead { font-size: var(--fs-16); }
+  .canon { font-size: var(--fs-12); }
+  .heroPanel { padding: var(--s2); border-radius: var(--radius-lg); }
+  .heroPanel::before { width: 7rem; height: 7rem; right: -3rem; top: -3.5rem; }
+  .panelEyebrow { font-size: .625rem; }
+  .panelTitle { margin-top: var(--s1); font-size: var(--fs-20); }
+  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: var(--s2); }
+  .stats div { min-width: 0; padding: var(--s1h) var(--s0); border-bottom: 0 !important; border-right: var(--stroke-hair) solid var(--glass-border); }
+  .stats div:nth-child(even) { padding-left: var(--s0); }
+  .stats div:last-child { border-right: 0; }
+  .stats dd { font-size: var(--fs-20); }
+  .stats dt { font-size: .5625rem; white-space: nowrap; }
+  .panelNote { margin-top: var(--s1); font-size: .625rem; }
+
+  .section { padding-block: var(--s5); scroll-margin-top: 9.25rem; }
+  .head { margin-bottom: var(--s3); }
+  .headRow { align-items: flex-start; }
+  .sectionTitle { font-size: var(--fs-24); }
+  .where { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  .body { width: 100%; font-size: var(--fs-14); }
+  .aside { padding: var(--s2); }
+
+  .words { margin-top: var(--s3); gap: var(--s2); }
+  .wordPanel { padding: var(--s3) 0 var(--s2); }
+  .panes { margin-top: var(--s3); }
+  .pane { padding: var(--s2); }
+  .semantics { grid-template-columns: 1fr; }
+  .alpha { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .sizeGrid { padding: var(--s1); gap: var(--s1); }
+  .sizeGrid > .card { padding: var(--s2); }
+  .icons { gap: var(--s2); flex-wrap: wrap; }
+  .elev { grid-template-columns: repeat(3, minmax(4.5rem, 1fr)); overflow-x: auto; padding-bottom: var(--s1); }
+  .shapes { gap: var(--s2); }
+  .shape { max-width: 7.5rem; }
+
+  .durations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .duration { padding: var(--s1h); }
+  .motionCard { padding: var(--s2); }
+
+  .type { margin-top: var(--s3); }
+  .typeRow { gap: var(--s1); padding: var(--s2) 0; }
+  .typeMeta { align-items: flex-start; }
+  .typeMeta .use { text-align: right; }
+  .specimen { max-width: 100%; }
+
+  .history { padding-left: var(--s2); gap: var(--s2h); }
+  .event { gap: var(--s0); }
+}
+
 @media (min-width: 40em) {
   .title { font-size: var(--fs-48); }
   .sectionTitle { font-size: var(--fs-32); }
@@ -626,8 +784,7 @@
   .sizeGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cardWide { grid-column: span 2; }
   .motionGrid { grid-template-columns: 1fr 1fr; }
-  .typeRow { grid-template-columns: 1fr 14rem; }
-  .typeMeta { flex-direction: column; gap: 0.125rem; align-items: flex-end; text-align: right; }
+  .typeMeta { flex-direction: row; gap: var(--s2); align-items: baseline; text-align: left; }
   .card { padding: var(--s4); }
 }
 
@@ -636,4 +793,5 @@
   .section { padding-block: var(--s8); }
   .hero { padding-block: var(--s8) var(--s6); }
   .panes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .heroGrid { grid-template-columns: minmax(0, 1.35fr) minmax(19rem, .65fr); }
 }
