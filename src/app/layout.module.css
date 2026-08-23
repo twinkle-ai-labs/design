@@ -81,6 +81,11 @@
 }
 .navLink:hover { color: var(--text); text-decoration: none; }
 
+.navLinkActive {
+  color: var(--accent);
+  font-weight: var(--fw-bold);
+}
+
 /* 구획이 제 여백을 갖는다 — 띠가 화면 전폭을 가로지르려면 통이 여기서 좁아지면 안 된다. */
 .main {
   flex: 1 0 auto;

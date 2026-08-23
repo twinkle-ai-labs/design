@@ -55,11 +55,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <StarMark gradientId="twinkle-brand" className={styles.star} />
               <span className={styles.brandName}>{NAME}</span>
             </a>
-            <nav className={styles.nav}>
+            <nav className={styles.nav} aria-label="주요 메뉴">
               <a href={HOME_URL} className={styles.navLink}>
                 홈
               </a>
-              <a href={DESIGN_URL} className={styles.navLink}>
+              <a href={DESIGN_URL} className={`${styles.navLink} ${styles.navLinkActive}`} aria-current="page">
                 디자인 시스템
               </a>
               <a href={BLOG_URL} className={styles.navLink}>
