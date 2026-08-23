@@ -67,9 +67,12 @@
   padding: var(--s4);
   border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 18%, transparent);
   border-radius: var(--radius-xl);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--primary-soft) 42%, var(--surface)));
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .18), transparent 42%),
+    color-mix(in srgb, var(--glass) 92%, var(--primary-soft));
+  -webkit-backdrop-filter: blur(1.5rem) saturate(140%);
   backdrop-filter: blur(1.5rem) saturate(140%);
-  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--primary) 13%, transparent), inset 0 1px rgba(255,255,255,.72);
+  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--primary) 13%, transparent), inset 0 1px rgba(255,255,255,.5);
 }
 .heroPanel::before {
   content: "";
@@ -192,7 +195,10 @@
   margin-top: var(--s3);
   padding: var(--s2h) var(--s3);
   border-radius: var(--radius-lg);
-  background: var(--primary-soft);
+  border: var(--stroke-hair) solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 82%, var(--primary-soft));
+  -webkit-backdrop-filter: blur(.75rem) saturate(120%);
+  backdrop-filter: blur(.75rem) saturate(120%);
   font-size: var(--fs-14);
   line-height: var(--lh-body);
   color: var(--text-sub);
@@ -239,9 +245,13 @@
   flex-direction: column;
   gap: var(--s1h);
   padding: var(--s3);
-  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--primary-soft) 20%, var(--surface)));
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .14), transparent 44%),
+    color-mix(in srgb, var(--glass) 90%, var(--surface));
+  -webkit-backdrop-filter: blur(1rem) saturate(125%);
+  backdrop-filter: blur(1rem) saturate(125%);
   border-radius: var(--radius-lg);
-  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.65);
+  box-shadow: 0 .75rem 2.25rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255,255,255,.42);
   border: var(--stroke-hair) solid color-mix(in srgb, var(--accent) 14%, transparent);
   transition: transform var(--motion-base) var(--ease), box-shadow var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease);
 }

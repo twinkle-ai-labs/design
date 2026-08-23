@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 홈
               </a>
               <a href={DESIGN_URL} className={styles.navLink}>
-                디자인
+                디자인 시스템
               </a>
               <a href={BLOG_URL} className={styles.navLink}>
                 블로그
