@@ -1,0 +1,53 @@
+/* 404 — 이 집에도 같은 밤이 깔린다. 값은 토큰에서만 꺼낸다:
+   클래스 안에 직접 적은 값은 시스템이 아니라 우연이고,
+   하필 이 집이 그 시스템을 설명하는 곳이다. */
+
+.wrap {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: var(--s8) var(--s2);
+  text-align: center;
+}
+
+.mark {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto var(--s3);
+  color: var(--accent);
+  opacity: var(--alpha-half);
+}
+
+.code {
+  font-size: var(--fs-12);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-wide);
+  color: var(--accent);
+  margin-bottom: var(--s1);
+}
+
+.title {
+  font-size: var(--fs-24);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-snug);
+}
+
+.body {
+  margin-top: var(--s1h);
+  color: var(--text-sub);
+  font-size: var(--fs-16);
+}
+
+/* 다음 한 걸음을 가리키는 면이라 그라데이션이 여기 온다. */
+.cta {
+  display: inline-block;
+  margin-top: var(--s3);
+  padding: var(--s1h) var(--s3);
+  border-radius: var(--radius-pill);
+  background: var(--brand-gradient);
+  color: var(--primary-ink);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  box-shadow: var(--shadow-brand);
+}
+.cta:hover { text-decoration: none; }
