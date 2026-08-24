@@ -7,6 +7,7 @@
 import type { Metadata } from "next";
 import { HERO } from "./design";
 import { DESIGN_URL, HOME_URL, NAME, SYSTEM_NAME } from "./site";
+import { OG_SIZE } from "./og";
 
 /** 이 집의 한 줄 소개 — 검색 결과에 서는 문장이다. */
 export const DESCRIPTION =
@@ -27,8 +28,7 @@ export const KEYWORDS = [
 /** 나눔 카드의 주소 — `app/og.png/route.tsx` 가 빌드 때 굽는다. */
 export const OG_IMAGE = {
   url: "/og.png",
-  width: 1200,
-  height: 630,
+  ...OG_SIZE,
   alt: `${SYSTEM_NAME} — ${NAME}의 디자인 시스템`,
   type: "image/png",
 } as const;
