@@ -11,7 +11,7 @@ import { OG_SIZE } from "./og";
 
 /** 이 집의 한 줄 소개 — 검색 결과에 서는 문장이다. */
 export const DESCRIPTION =
-  "Twinkle AI Labs의 제품을 하나의 언어로 연결하는 디자인 시스템, Aurora Ledger를 소개합니다.";
+  "색상부터 간격과 움직임까지, 모든 선택에 이유를 남깁니다. Twinkle AI Labs의 제품을 하나의 언어로 연결하는 디자인 시스템입니다.";
 
 /** 주소를 눈으로 읽는 꼴 — 나눔 카드의 발치에 선다. */
 export const DOMAIN = new URL(DESIGN_URL).host;

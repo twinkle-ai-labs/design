@@ -14,13 +14,13 @@ import type { Metadata } from "next";
 import { shareCard } from "@/lib/seo";
 
 const DESCRIPTION =
-  "Twinkle AI Labs의 모든 제품이 공유하는 디자인 시스템, Aurora Ledger의 토큰과 원칙을 소개합니다.";
+  "색상부터 간격과 움직임까지, 모든 선택에 이유를 남깁니다. Twinkle AI Labs의 제품을 하나의 언어로 연결하는 디자인 시스템입니다.";
 
 export const metadata: Metadata = {
-  title: "Aurora Ledger",
+  title: "Aurora Ledger | Twinkle AI Labs 디자인 시스템",
   description: DESCRIPTION,
   alternates: { canonical: "/" },
-  ...shareCard({ title: "Aurora Ledger — 디자인 시스템", description: DESCRIPTION, path: "/" }),
+  ...shareCard({ title: "Aurora Ledger | Twinkle AI Labs 디자인 시스템", description: DESCRIPTION, path: "/" }),
 };
 
 /**

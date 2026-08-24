@@ -1,7 +1,7 @@
 import { HERO } from "@/lib/design";
 import { ogCard } from "@/lib/og";
 import { DOMAIN } from "@/lib/seo";
-import { SYSTEM_NAME } from "@/lib/site";
+import { NAME, SYSTEM_NAME } from "@/lib/site";
 
 /* 배포본은 서버가 없다 — 이 그림은 빌드 때 한 번 구워져 정적 파일로 남는다. */
 export const dynamic = "force-static";
@@ -15,7 +15,7 @@ export const dynamic = "force-static";
  */
 export function GET() {
   return ogCard({
-    eyebrow: HERO.eyebrow,
+    eyebrow: `${NAME} · ${HERO.eyebrow}`,
     title: SYSTEM_NAME,
     lead: HERO.lead,
     domain: DOMAIN,
