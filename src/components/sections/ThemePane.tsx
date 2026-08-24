@@ -19,10 +19,16 @@ function ChipList({ swatches, theme }: { swatches: Chip[]; theme: PaneTheme }) {
           <li
             key={swatch.token}
             className={styles.chip}
-            style={{ background: face.bg, color: face.ink, boxShadow: face.shadow }}
           >
-            <code className={styles.chipToken}>{swatch.token}</code>
-            <span className={styles.chipValue}>{face.value}</span>
+            <i
+              className={styles.chipSwatch}
+              style={{ background: face.bg, boxShadow: face.shadow }}
+              aria-hidden="true"
+            />
+            <span className={styles.chipCopy}>
+              <code className={styles.chipToken}>{swatch.token}</code>
+              <span className={styles.chipValue}>{face.value}</span>
+            </span>
           </li>
         );
       })}

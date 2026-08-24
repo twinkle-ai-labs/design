@@ -360,19 +360,43 @@
 }
 
 .chip {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.125rem;
-  min-height: 4.4rem;
-  padding: var(--s1h);
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s1);
+  min-height: 3.5rem;
+  padding: var(--s1);
   border-radius: var(--radius-sm);
   font-size: var(--fs-11);
   line-height: var(--lh-tight);
 }
-/* 판과 같은 색인 칩은 헤어라인 하나로만 선다 — 그늘을 제 것으로 가진 칩(lifted)은 그것이 이긴다 */
-.paneLight .chip:not([style*="box-shadow"]) { box-shadow: inset 0 0 0 var(--stroke-hair) rgba(33, 24, 45, 0.08); }
-.paneDark .chip:not([style*="box-shadow"]) { box-shadow: inset 0 0 0 var(--stroke-hair) rgba(250, 247, 255, 0.08); }
+
+/* 색 자체는 작은 스와치가 보여주고, 설명용 칩은 한결같은 중성 면에 둔다.
+   surface·lifted·key가 모두 흰색이어도 흰 뱃지가 반복되어 보이지 않는다. */
+.paneLight .chip {
+  background: color-mix(in srgb, #7040D9 5%, #F5F4F8);
+  box-shadow: inset 0 0 0 var(--stroke-hair) rgba(112, 64, 217, 0.09);
+}
+.paneDark .chip {
+  background: color-mix(in srgb, #B79AFF 7%, #1B1526);
+  box-shadow: inset 0 0 0 var(--stroke-hair) rgba(183, 154, 255, 0.1);
+}
+
+.chipSwatch {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+}
+.paneLight .chipSwatch { box-shadow: inset 0 0 0 var(--stroke-hair) rgba(33, 24, 45, 0.1); }
+.paneDark .chipSwatch { box-shadow: inset 0 0 0 var(--stroke-hair) rgba(250, 247, 255, 0.12); }
+
+.chipCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.125rem;
+}
 
 .chipToken {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -380,7 +404,7 @@
   font-weight: var(--fw-medium);
   color: inherit;
 }
-.chipValue { opacity: 0.65; font-variant-numeric: tabular-nums; }
+.chipValue { overflow-wrap: anywhere; opacity: 0.65; font-variant-numeric: tabular-nums; }
 
 /* 글자 — 칩이 아니라 잉크 그대로 */
 .inks {
