@@ -117,7 +117,9 @@ export const SECTIONS = {
     kicker: "Interaction",
     title: "빠르고 자연스러운 움직임",
     code: "motion",
-    hint: "카드에 포인터를 올려 진입과 퇴장 곡선의 차이를 확인해 보세요.",
+    /** 두 판이 같은 꼴이라 안내도 한 벌이다 — 왼쪽은 «얼마나», 오른쪽은 «어떻게». */
+    hintDurations: "카드에 포인터를 올려 세 시계가 닿는 차이를 확인해 보세요.",
+    hintCurves: "카드에 포인터를 올려 진입과 퇴장 곡선의 차이를 확인해 보세요.",
   },
   type: {
     kicker: "Foundation",

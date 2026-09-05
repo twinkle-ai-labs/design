@@ -11,7 +11,7 @@ export default function SpacingSection() {
       <div className={styles.shell}>
         <SectionHead kicker={spacing.kicker} title={spacing.title} code={spacing.code} />
         <p className={styles.body}>{spacing.body}</p>
-        <ol className={styles.spacing}>
+        <ol className={`${styles.card} ${styles.spacing}`}>
           {SPACING.map((step) => (
             <li key={step.token} className={styles.spaceRow}>
               <code className={styles.token}>{step.token}</code>

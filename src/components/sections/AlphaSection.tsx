@@ -12,7 +12,7 @@ export default function AlphaSection() {
         <p className={styles.body}>{alpha.body}</p>
         <ul className={styles.alpha}>
           {ALPHA.map((step) => (
-            <li key={step.token} className={styles.alphaStep}>
+            <li key={step.token} className={`${styles.card} ${styles.alphaStep}`}>
               <span className={styles.alphaSwatch} style={{ opacity: Number(step.value) }} />
               <code className={styles.token}>{step.token}</code>
               <span className={styles.big}>{step.value}</span>
