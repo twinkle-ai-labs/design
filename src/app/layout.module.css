@@ -16,6 +16,17 @@
   transition: background var(--motion-base) var(--ease), border-color var(--motion-base) var(--ease), box-shadow var(--motion-base) var(--ease), backdrop-filter var(--motion-base) var(--ease);
 }
 
+.scrollProgress {
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 3px;
+  background: linear-gradient(90deg, #8756e8 0%, #b78af4 45%, #e2acd8 72%, #98d4ed 100%);
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  box-shadow: 0 1px 8px color-mix(in srgb, var(--primary) 25%, transparent);
+  transform-origin: left;
+  pointer-events: none;
+}
+
 .headerScrolled {
   background: color-mix(in srgb, var(--glass) 94%, transparent);
   -webkit-backdrop-filter: blur(1.5rem) saturate(155%);
@@ -24,17 +35,8 @@
   box-shadow: 0 .625rem 2rem color-mix(in srgb, var(--primary) 9%, transparent), inset 0 1px rgba(255, 255, 255, .32);
 }
 
-/* 머리띠의 바탕과 밑줄은 이 겹이 든다 — 맨 위에서는 없고, 스크롤하면 켜진다.
-   맨 위에서 판이 그어져 있으면 첫 화면이 «머리띠 + 하늘» 둘로 잘려 보인다.
-   글이 머리띠 밑으로 들어가기 시작할 때에야 그 판이 필요해진다.
-
-   글자가 아니라 이 겹만 켜고 끄는 이유: 바탕을 직접 여닫으면 backdrop-filter 가
-   투명할 때에도 뒤를 흐려서, 아직 덮을 것이 없는데 하늘이 뭉개진다. */
-.header::after {
-  content: none;
-}
-
 .headerInner {
+  position: relative;
   height: 100%;
   box-sizing: border-box;
   max-width: var(--shell);
@@ -53,6 +55,7 @@
   color: var(--text);
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-snug);
+  flex-shrink: 0;
 }
 .brand:hover { text-decoration: none; }
 
@@ -67,6 +70,15 @@
 
 .brandName { font-size: var(--fs-16); }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.themeControl { display: flex; order: 1; }
+.menuToggle { display: none; }
+
 .nav {
   display: flex;
   align-items: center;
@@ -77,6 +89,7 @@
   color: var(--text-sub);
   font-size: var(--fs-14);
   font-weight: var(--fw-semibold);
+  white-space: nowrap;
   transition: color var(--motion-fast) var(--ease);
 }
 .navLink:hover { color: var(--text); text-decoration: none; }
@@ -176,13 +189,53 @@
 .footerLink:hover { color: var(--accent); text-decoration: none; }
 
 @media (max-width: 39.99em) {
-  /* 좁은 화면에서는 로고와 테마 전환만 남긴다. 전체 링크는 바닥에서 제공한다. */
-  .navLink { display: none; }
-  .header { left: 0; right: 0; width: auto; max-width: 100vw; }
   .headerInner { width: 90vw; max-width: 90vw; min-width: 0; padding: 0; margin-inline: auto; }
   .brandName { font-size: var(--fs-14); }
   .brand { min-width: 0; }
-  .nav { flex: none; gap: 0; }
+  .headerActions { flex: none; gap: var(--s1); }
+  .themeControl { order: 0; }
+  .themeControl > button { width: var(--s5); height: var(--s5); }
+  .menuToggle {
+    width: var(--s5);
+    height: var(--s5);
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--stroke-hair) solid var(--card-border);
+    border-radius: var(--radius-pill);
+    background: var(--glass);
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: background var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
+  }
+  .menuToggle:hover, .menuToggle[aria-expanded="true"] { background: var(--primary-soft); color: var(--accent); }
+  .menuIcon { width: var(--icon-md); height: var(--icon-md); }
+  .nav {
+    position: absolute;
+    top: calc(100% + var(--s1));
+    inset-inline: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s0);
+    max-height: calc(100dvh - var(--s7) - var(--s2));
+    overflow-y: auto;
+    padding: var(--s1);
+    border: var(--stroke-hair) solid var(--card-border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-floating);
+  }
+  .nav[data-open="true"] { display: flex; }
+  .navLink {
+    display: flex;
+    align-items: center;
+    min-height: var(--s5);
+    padding: var(--s1) var(--s2);
+    border-radius: var(--radius-sm);
+  }
+  .navLink:hover, .navLinkActive { background: var(--primary-soft); }
   .footerInner { width: 90%; max-width: 90vw; padding-left: 0; padding-right: 0; margin-inline: auto; }
 }
 
