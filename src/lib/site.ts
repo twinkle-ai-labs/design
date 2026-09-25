@@ -22,6 +22,7 @@ export type NavLink = { key: string; label: string; href: string };
 
 export const NAV_LINKS: readonly NavLink[] = [
   { key: "home", label: "홈", href: HOME_URL },
+  { key: "apps", label: "앱", href: `${HOME_URL}/app/` },
   { key: "design", label: "디자인 시스템", href: DESIGN_URL },
   { key: "blog", label: "블로그", href: BLOG_URL },
   { key: "terms", label: "약관", href: POLARIS_URL },
