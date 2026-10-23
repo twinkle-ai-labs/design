@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from "next";
-import { HERO } from "./design";
+import { DESIGN_METADATA } from "./design";
 import { DESIGN_URL, HOME_URL, NAME, SYSTEM_NAME } from "./site";
 import { OG_SIZE } from "./og";
 
@@ -39,7 +39,15 @@ export const OG_IMAGE = {
  * Next 는 `openGraph` 를 **통째로** 갈아 끼운다 — 장이 제목만 적으면 레이아웃이
  * 정한 카드 그림·이름이 조용히 떨어진다. 그래서 장은 이 함수로 한 벌을 통째로 짓는다.
  */
-export function shareCard({ title, description, path }: { title: string; description: string; path: string }): Pick<Metadata, "openGraph" | "twitter"> {
+export function shareCard({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Pick<Metadata, "openGraph" | "twitter"> {
   return {
     openGraph: {
       type: "website",
@@ -70,7 +78,7 @@ export function jsonLd(): string {
   const article = {
     "@type": "TechArticle",
     "@id": `${DESIGN_URL}/#article`,
-    headline: `${SYSTEM_NAME} — ${HERO.lead}`,
+    headline: `${SYSTEM_NAME} — ${DESIGN_METADATA.lead}`,
     name: SYSTEM_NAME,
     url: `${DESIGN_URL}/`,
     inLanguage: "ko-KR",

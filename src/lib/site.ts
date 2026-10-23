@@ -35,8 +35,3 @@ export const THEME_TOGGLE_LABELS = {
   toLight: "밝은 화면으로",
   toDark: "어두운 화면으로",
 } as const;
-
-/** 바닥글의 한 줄 소개 — 머리띠가 이름만 말하므로, 무엇을 하는 곳인지는 여기서 한 번 더. */
-export const FOOTER_BLURB = "모든 제품이 같은 목소리로 말하고 움직이게 하는 디자인 시스템입니다.";
-
-export const FOOTER_HEADINGS = { nav: "바로가기", contact: "연락" } as const;

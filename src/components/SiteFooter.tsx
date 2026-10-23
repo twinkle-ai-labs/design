@@ -1,59 +1,71 @@
 import StarMark from "@/components/StarMark";
-import Starfield from "@/components/Starfield";
-import {
-  CONTACT_EMAIL,
-  FOOTER_BLURB,
-  FOOTER_HEADINGS,
-  NAME,
-  NAV_LINKS,
-  SYSTEM_NAME,
-} from "@/lib/site";
-import styles from "@/app/layout.module.css";
-
-/** 바닥에도 하늘 한 자락 — 첫 화면과 마지막 화면이 같은 말로 끝난다. */
-const FOOTER_SKY_SEED = 19910104;
+import { CONTACT_EMAIL, HOME_URL, NAME, NAV_LINKS } from "@/lib/site";
+import { STUDIO_APPS, STUDIO_SOCIALS } from "@/lib/studio";
+import s from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
   return (
-    <footer className={styles.footer}>
-      <Starfield
-        seed={FOOTER_SKY_SEED}
-        height="100%"
-        dots={26}
-        sparkles={3}
-        className={styles.footerSky}
-      />
-      <div className={styles.footerInner}>
-        <div className={styles.footerTop}>
-          <div className={styles.footerBrand}>
-            <p className={styles.footerName}>
-              <StarMark className={styles.footerStar} />
+    <footer className={s.footer}>
+      <div className={s.shell}>
+        <div className={s.top}>
+          <div className={s.brand}>
+            <a href={HOME_URL} className={s.name}>
+              <span className={s.symbol}>
+                <StarMark gradientId="footer-brand" />
+              </span>
               {NAME}
-            </p>
-            <p className={styles.footerLine}>{FOOTER_BLURB}</p>
+            </a>
+            <p>필요한 도구를, 좋아하는 모습으로.</p>
+            <span className={s.caption}>독립적으로 만들고, 직접 쓰며 다듬습니다.</span>
           </div>
-          {/* 머리띠와 **같은 목록**을 읽는다 — 메뉴가 하나 늘면 두 곳이 함께 는다. */}
-          <nav className={styles.footerColumn} aria-label="바닥글 메뉴">
-            <p className={styles.footerHeading}>{FOOTER_HEADINGS.nav}</p>
-            <div className={styles.footerLinks}>
-              {NAV_LINKS.map((link) => (
-                <a key={link.key} href={link.href} className={styles.footerLink}>
+          <nav className={s.column} aria-label="푸터 앱 목록">
+            <h2>APPS</h2>
+            {STUDIO_APPS.map((app) => (
+              <a key={app.href} href={app.href}>
+                {app.name}
+              </a>
+            ))}
+          </nav>
+          <nav className={s.column} aria-label="바닥글 메뉴">
+            <h2>EXPLORE</h2>
+            {NAV_LINKS.filter((link) => link.key !== "home").map((link) => (
+              <a key={link.key} href={link.key === "design" ? "/" : link.href}>
+                {link.label}
+                <span aria-hidden="true">{link.key !== "design" && "↗"}</span>
+              </a>
+            ))}
+          </nav>
+          <div className={s.column}>
+            <h2>LET’S TALK</h2>
+            <a className={s.mail} href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+              <span aria-hidden="true">↗</span>
+            </a>
+            <p className={s.invitation}>앱에 대한 생각, 편하게 들려주세요.</p>
+            <nav className={s.social} aria-label="소셜 미디어">
+              {STUDIO_SOCIALS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} (새 탭에서 열림)`}
+                >
                   {link.label}
+                  <span aria-hidden="true">↗</span>
                 </a>
               ))}
-            </div>
-          </nav>
-          <div className={styles.footerColumn}>
-            <p className={styles.footerHeading}>{FOOTER_HEADINGS.contact}</p>
-            <a className={styles.footerMail} href={`mailto:${CONTACT_EMAIL}`}>
-              {CONTACT_EMAIL}
-            </a>
+            </nav>
           </div>
         </div>
-        <div className={styles.footerBottom}>
-          <p className={styles.footerCopyright}>© 2026 {NAME}</p>
-          {/* 홈은 여기에 다짐을 놓는다. 이 집이 놓는 것은 이 집이 기르는 것의 이름이다. */}
-          <p className={styles.footerMotto}>{SYSTEM_NAME}</p>
+        <div className={s.bottom}>
+          <span>
+            © {new Date().getFullYear()} {NAME}
+          </span>
+          <span className={s.signature}>
+            <StarMark />
+            스스로 빛나다.
+          </span>
         </div>
       </div>
     </footer>

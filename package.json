@@ -8,7 +8,9 @@
     "build": "DESIGN_EXPORT=1 next build && rm -rf out && mv .next-export out",
     "preview": "npm run build && npx --yes serve out -l 3947",
     "tokens:sync": "node scripts/sync-design-tokens.mjs",
-    "tokens:check": "node scripts/sync-design-tokens.mjs --check"
+    "tokens:check": "node scripts/sync-design-tokens.mjs --check",
+    "format": "prettier --write \"src/**/*.{ts,tsx,mjs,css,astro}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,mjs,css,astro}\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
@@ -21,6 +23,7 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "prettier": "3.6.2",
     "typescript": "^5.7.0"
   }
 }

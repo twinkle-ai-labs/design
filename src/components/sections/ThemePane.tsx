@@ -16,10 +16,7 @@ function ChipList({ swatches, theme }: { swatches: Chip[]; theme: PaneTheme }) {
       {swatches.map((swatch) => {
         const face = swatch[theme];
         return (
-          <li
-            key={swatch.token}
-            className={styles.chip}
-          >
+          <li key={swatch.token} className={styles.chip}>
             <i
               className={styles.chipSwatch}
               style={{ background: face.bg, boxShadow: face.shadow }}

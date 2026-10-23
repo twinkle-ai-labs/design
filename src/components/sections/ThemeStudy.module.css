@@ -1,0 +1,231 @@
+.study {
+  min-width: 0;
+  position: relative;
+}
+.study::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 5% -8%;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--accent) 17%, transparent),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.toolbar > span {
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+.switcher {
+  display: flex;
+  padding: 3px;
+  border: 1px solid var(--divider);
+  border-radius: 100px;
+}
+.switcher button {
+  min-height: 40px;
+  padding: 0.4rem 1rem;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 0.8125rem;
+}
+.switcher button[aria-pressed="true"] {
+  background: var(--primary-soft);
+  color: var(--accent);
+}
+.canvas {
+  color: light-dark(#21182d, #faf7ff);
+  background: linear-gradient(145deg, light-dark(#fff, #30243e), light-dark(#f5f0fb, #18111f));
+  border: 1px solid light-dark(#ddd1ec, #574366);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 22px 65px light-dark(#35214216, #0000002b);
+}
+.canvasHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid light-dark(#e6ddec, #ffffff10);
+  font-size: 0.75rem;
+}
+.canvasHead svg {
+  width: 16px;
+  height: 16px;
+}
+.canvasHead > span:last-child {
+  margin-left: auto;
+  opacity: 0.6;
+  font-size: 0.625rem;
+  font-variant-numeric: tabular-nums;
+}
+.composition {
+  position: relative;
+  height: 290px;
+  overflow: hidden;
+}
+.orbit {
+  position: absolute;
+  width: 290px;
+  height: 230px;
+  border: 1px solid light-dark(#c8b4df, #b79aff30);
+  border-radius: 50%;
+  transform: rotate(-28deg);
+  left: 12%;
+  top: 18px;
+}
+.glassStar {
+  position: absolute;
+  top: 32px;
+  right: 13%;
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border: 1px solid light-dark(#cfb7e6, #dfc2ff50);
+  background: linear-gradient(
+    130deg,
+    light-dark(#ffffffb0, #dec4ff25),
+    light-dark(#dac9ee60, #b19adf0a)
+  );
+  border-radius: 34px;
+  transform: rotate(14deg);
+  box-shadow:
+    12px 20px 32px #1f0f3520,
+    inset 1px 1px 0 #ffffff35;
+  transition: transform 0.5s;
+}
+.glassStar svg {
+  width: 82px;
+  height: 82px;
+}
+.canvas:hover .glassStar {
+  transform: translateY(-6px) rotate(7deg);
+}
+.specimen {
+  position: absolute;
+  bottom: 57px;
+  left: 8%;
+  font-size: 6rem;
+  line-height: 1;
+  letter-spacing: -0.07em;
+  font-weight: 500;
+}
+.specimenLabel {
+  position: absolute;
+  left: 9%;
+  bottom: 16px;
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+.note {
+  position: absolute;
+  bottom: 24px;
+  right: 8%;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  text-align: right;
+}
+.note small {
+  display: block;
+  font-size: 0.625rem;
+  opacity: 0.65;
+}
+.palette {
+  display: flex;
+  height: 42px;
+  margin: 1rem 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.palette i {
+  flex: 1;
+}
+.palette i:nth-child(1) {
+  background: light-dark(#eee7fc, #110d19);
+}
+.palette i:nth-child(2) {
+  background: light-dark(#d8c7f6, #352742);
+}
+.palette i:nth-child(3) {
+  background: light-dark(#b695ee, #7040d9);
+}
+.palette i:nth-child(4) {
+  background: light-dark(#8550e4, #b79aff);
+}
+.palette i:nth-child(5) {
+  background: light-dark(#7040d9, #e9daff);
+}
+.canvasFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem 1.4rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+.hint {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-sub);
+  text-align: center;
+}
+@media (max-width: 520px) {
+  .composition {
+    height: 250px;
+  }
+  .glassStar {
+    width: 110px;
+    height: 110px;
+    right: 10%;
+  }
+  .glassStar svg {
+    width: 70px;
+    height: 70px;
+  }
+  .specimen {
+    font-size: 5rem;
+  }
+  .note {
+    right: 7%;
+  }
+  .canvasHead {
+    padding-inline: 1.2rem;
+  }
+  .orbit {
+    width: 230px;
+    height: 200px;
+    left: 3%;
+  }
+  .palette {
+    margin-inline: 1.2rem;
+  }
+  .canvasFoot {
+    padding-inline: 1.2rem;
+    font-size: 0.625rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glassStar {
+    transition: none;
+  }
+  .canvas:hover .glassStar {
+    transform: rotate(14deg);
+  }
+}
