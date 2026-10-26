@@ -1,4 +1,4 @@
-import { HERO } from "@/lib/design";
+import { DESIGN_METADATA } from "@/lib/design";
 import { ogCard } from "@/lib/og";
 import { DOMAIN } from "@/lib/seo";
 import { NAME, SYSTEM_NAME } from "@/lib/site";
@@ -15,9 +15,9 @@ export const dynamic = "force-static";
  */
 export function GET() {
   return ogCard({
-    eyebrow: `${NAME} · ${HERO.eyebrow}`,
+    eyebrow: `${NAME} · ${DESIGN_METADATA.eyebrow}`,
     title: SYSTEM_NAME,
-    lead: HERO.lead,
+    lead: DESIGN_METADATA.lead,
     domain: DOMAIN,
   });
 }

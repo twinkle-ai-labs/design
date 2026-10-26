@@ -20,7 +20,11 @@ export const metadata: Metadata = {
   title: "Aurora Ledger | Twinkle AI Labs 디자인 시스템",
   description: DESCRIPTION,
   alternates: { canonical: "/" },
-  ...shareCard({ title: "Aurora Ledger | Twinkle AI Labs 디자인 시스템", description: DESCRIPTION, path: "/" }),
+  ...shareCard({
+    title: "Aurora Ledger | Twinkle AI Labs 디자인 시스템",
+    description: DESCRIPTION,
+    path: "/",
+  }),
 };
 
 /**
